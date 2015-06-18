@@ -1,0 +1,75 @@
+﻿@model PagedList.IPagedList<CarListingDemo.Models.Car>
+
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "Car Listing";
+}
+
+<div ng-controller="carIndexCtrl">
+    <h2>Car Listing</h2>
+
+    @using (Html.BeginForm("Index", "Car", FormMethod.Get))
+    {
+        <p>
+            Find by model or make: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+            <input type="submit" value="Search" />
+        </p>
+    }
+
+
+    @*<p>
+            @Html.ActionLink("Create New", "Create")
+        </p>*@
+    <table class="table">
+        <tr>
+            <th>
+                Make
+            </th>
+            <th>
+                @Html.ActionLink("Model", "Index", new { sortOrder = ViewBag.ModelSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th>
+                @Html.ActionLink("Year", "Index", new { sortOrder = ViewBag.YearSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+
+            <th>
+               Sale Type
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Make)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Model)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Year)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.SaleTypeDescription)
+                </td>
+
+                <td>
+                   
+                    @Html.ActionLink("Details", "Details", new { id = item.CarId })
+                </td>
+            </tr>
+        }
+
+    </table>
+    <br />
+  
+</div>
+  Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+

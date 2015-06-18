@@ -1,0 +1,131 @@
+﻿@model CarListingDemo.ViewModel.CarDetailsViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+
+<div ng-controller="carDetailsCtrl" ng-init="init('@Model.Car.PriceTypeDescription','@Model.Car.SaleTypeDescription','@Model.Car.CarId')">
+
+
+
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-10"><h2>Car Details</h2></div>
+            <div class="col-md-2 top-buffer20"><h4>@Html.ActionLink("Go Back", "Index")</h4></div>
+        </div>
+
+        <hr />
+
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-3"><strong>@Html.DisplayNameFor(model => model.Car.Make)</strong></div>
+                <div class="col-md-9">@Html.DisplayFor(model => model.Car.Make)</div>
+            </div>
+
+            <div class="row top-buffer">
+                <div class="col-md-3"><strong>@Html.DisplayNameFor(model => model.Car.Model)</strong></div>
+                <div class="col-md-9">@Html.DisplayFor(model => model.Car.Model)</div>
+            </div>
+
+            <div class="row top-buffer">
+                <div class="col-md-3"><strong>@Html.DisplayNameFor(model => model.Car.Year)</strong></div>
+                <div class="col-md-9">@Html.DisplayFor(model => model.Car.Year)</div>
+            </div>
+
+            <div class="row top-buffer">
+                <div class="col-md-3"><strong>@Html.DisplayNameFor(model => model.Car.PriceTypeDescription)</strong></div>
+                <div class="col-md-9">@Html.DisplayFor(model => model.Car.PriceTypeDescription)</div>
+            </div>
+
+            <div class="row top-buffer" ng-show="displayEGC">
+                <div class="col-md-3"><strong>@Html.DisplayNameFor(model => model.Car.EgcPrice)</strong></div>
+                <div class="col-md-9">@Html.DisplayFor(model => model.Car.EgcPrice)</div>
+            </div>
+
+            <div class="row top-buffer" ng-show="displayDAP">
+                <div class="col-md-3"><strong>@Html.DisplayNameFor(model => model.Car.DapPrice)</strong></div>
+                <div class="col-md-9">@Html.DisplayFor(model => model.Car.DapPrice)</div>
+            </div>
+
+            <div class="row top-buffer">
+                <div class="col-md-3"><strong>@Html.DisplayNameFor(model => model.Car.SaleTypeDescription)</strong></div>
+                <div class="col-md-9">@Html.DisplayFor(model => model.Car.SaleTypeDescription)</div>
+            </div>
+
+            <div class="row top-buffer">
+                <div class="col-md-3"><strong>@Html.DisplayNameFor(model => model.Car.Email)</strong></div>
+                <div class="col-md-9">@Html.DisplayFor(model => model.Car.Email)</div>
+            </div>
+
+            <div class="row top-buffer" ng-show="isPrivate">
+                <div class="col-md-3"><strong>@Html.DisplayNameFor(model => model.Car.ContactName)</strong></div>
+                <div class="col-md-9">@Html.DisplayFor(model => model.Car.ContactName)</div>
+            </div>
+
+            <div class="row top-buffer" ng-show="isPrivate">
+                <div class="col-md-3"><strong>@Html.DisplayNameFor(model => model.Car.Phone)</strong></div>
+                <div class="col-md-9">@Html.DisplayFor(model => model.Car.Phone)</div>
+            </div>
+
+            <div class="row top-buffer" ng-show="isDelear">
+                <div class="col-md-3"><strong>@Html.DisplayNameFor(model => model.Car.ABN)</strong></div>
+                <div class="col-md-9">@Html.DisplayFor(model => model.Car.ABN)</div>
+            </div>
+
+            <div class="row top-buffer">
+                <div class="col-md-3"><strong>@Html.DisplayNameFor(model => model.Car.Comments)</strong></div>
+                <div class="col-md-9">@Html.DisplayFor(model => model.Car.Comments)</div>
+            </div>
+            <hr />
+
+        </div>
+
+        <form name="enquiryForm">
+            <h2>Enquire about this car</h2>
+
+            <div class="col-md-12">
+                <div class="row top-buffer">
+                    <div class="col-md-3"><strong>Name: </strong></div>
+                    <div class="col-md-9">
+                        <input class ="name-width" type="text" ng-model="enquire.EnquiryName" placeholder="Name is required" required>
+</div>
+                </div>
+
+                <div class="row top-buffer">
+                    <div class="col-md-3"><strong>Email: </strong></div>
+                    <div class="col-md-9">
+                        <input class="name-width" type="email" ng-model="enquire.Email" placeholder="Email is required" required>
+                    </div>
+                </div>
+
+                <div class="row top-buffer">
+                    <div class="col-md-3"><strong>Content: </strong></div>
+                    @*<i ng-hide="enquire.Content || enquiryForm.$valid" ng-class="{'fa fa-times-circle': !enquire.Content}" title="Enquiry content is required."></i>*@
+                    <div class="col-md-9">
+                        <textarea class="content-width" rows="5" placeholder="please input a enquiry content" ng-model="enquire.Content" required></textarea>
+                    </div>
+                </div>
+
+                <div class="top-buffer30" ng-init="setForm(enquiryForm)">
+                    <div class="row">
+                        <div class="col-md-9">
+                            <button ng-class="{'btn btn-primary':(!enquiryForm.$invalid && !enquiryForm.$pristine),'btn btn-primary disabled':(enquiryForm.$invalid || enquiryForm.$pristine)}" ng-click="SaveEnquire('@Model.Car.CarId')" ng-disabled="enquiryForm.$invalid || enquiryForm.$pristine">Save Enquire</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+        </form>
+        <hr />
+      
+
+    </div>
+
+
+
+</div>
