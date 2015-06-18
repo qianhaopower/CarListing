@@ -1,0 +1,16 @@
+1.	Run instruction
+1)	Please open solution with Visual Studio 2013.
+2)	Please make sure localdb\(v11.0) is available. 
+3)	Please allow Nuget getting packages.
+4)	On bootstrap, Entity Framework will create a SQL Server database and seed some data (car records) into database. 
+2.	Architecture Diagram
+ 
+Core technology set: HTML, CSS (bootstrap), AngularJS, ASP.NET MVC5, Entity framework 6 (Code First), SQL Server, Log4Net (Third party logging tool).
+
+3.	What can be improved.
+Due to a limit of time functions below are not implement
+1)	Give each car a picture.
+2)	Implement authentication, only logged in users can view page. (Currently user can login but anyone can view cars.
+3)	Display enquiry records for each car on car details page.
+4)	User asynchronous method on client side ($q) and server (await and async).
+5)	Add editing/deleting car functions. 
